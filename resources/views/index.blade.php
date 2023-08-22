@@ -100,8 +100,8 @@
                     <div class="text-gray-500">Votes</div>
                 </div>
                 <div class="mt-8">
-                    <button class="w-20 bg-gray-200 border border-gray-200 hover:border-gray-400 transition duration-150 ease-in
-                    font-bold text-xxs uppercase rounded-xl px-4 py-3 bg-blue text-white">Vote
+                    <button class="w-20 bg-blue border border-gray-200 hover:border-gray-400 transition duration-150 ease-in
+                    font-bold text-xxs uppercase rounded-xl px-4 py-3 text-white">Vote
                     </button>
                 </div>
             </div>
