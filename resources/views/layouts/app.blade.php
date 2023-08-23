@@ -68,7 +68,7 @@
             <form action="#" method="POST" class="space-y-4 px-4 py-6">
                 <div>
                     <input type="text"
-                           class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2"
+                           class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-400 px-4 py-2"
                            placeholder="Your Idea">
                 </div>
                 <div>
@@ -82,7 +82,7 @@
                 </div>
                 <div>
                     <textarea name="idea" id="idea" cols="30" rows="4"
-                              class="w-full bg-gray-100 rounded-xl placeholder-gray-900 border-none text-sm px-4 py-2"
+                              class="w-full bg-gray-100 rounded-xl placeholder-gray-400 border-none text-sm px-4 py-2"
                               placeholder="Describe your idea"
                     ></textarea>
                 </div>
