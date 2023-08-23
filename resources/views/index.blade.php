@@ -31,7 +31,8 @@
     </div> <!-- end filters-->
 
     <div class="ideas-container space-y-6 my-6">
-        <div class="idea-container bg-white rounded-xl flex hover:shadow-card transition duration-150 ease-in cursor-pointer">
+        <div
+            class="idea-container bg-white rounded-xl flex hover:shadow-card transition duration-150 ease-in cursor-pointer">
             <div class="border-r border-gray-100 px-5 py-8">
                 <div class="text-center">
                     <div class="font-semibold text-2xl">12</div>
@@ -65,24 +66,41 @@
                             <div>&bull;</div>
                             <div class="text-gray-800">3 Comments</div>
                         </div>
-                        <div class="flex items-center space-x-2 ">
+                        <div
+                            x-data="{ isOpen: false }"
+                            class="flex items-center space-x-2 "
+                        >
                             <div
                                 class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4"
-                            >Open</div>
+                            >Open
+                            </div>
+
                             <button
-                                class="relative border bg-gray-100 hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in px-3">
+                                @click="isOpen = !isOpen"
+                                class="relative border bg-gray-100 hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in px-3"
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                           d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
                                 </svg>
-                                <ul class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 ml-8 text-left">
-                                    <li><a href="#"
-                                           class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in">Mark
-                                            as spam</a></li>
-                                    <li><a href="#"
-                                           class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-red">Delete
-                                            Post</a></li>
+                                <ul
+                                    x-cloak
+                                    x-show.transition.origin.top.left="isOpen"
+                                    @click.away="isOpen = false"
+                                    @keydown.escape.window="isOpen = false"
+                                    class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 ml-8 text-left z-10"
+                                >
+                                    <li>
+                                        <a href="#"
+                                           class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in"
+                                        >Mark as spam</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-red"
+                                        >Delete Post</a>
+                                    </li>
                                 </ul>
                             </button>
                         </div>
@@ -91,7 +109,8 @@
             </div>
         </div>
 
-        <div class="idea-container bg-white rounded-xl flex hover:shadow-card transition duration-150 ease-in cursor-pointer">
+        <div
+            class="idea-container bg-white rounded-xl flex hover:shadow-card transition duration-150 ease-in cursor-pointer">
             <div class="border-r border-gray-100 px-5 py-8">
                 <div class="text-center">
                     <div class="font-semibold text-2xl text-blue">66</div>
