@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns:livewire="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,12 +10,14 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
 
+    <livewire:styles />
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans text-gray-900 text-sm bg-gray-background">
 <header class="flex flex-col md:flex-row items-center justify-between px-8 py-4">
-    <a href="#">
+    <a href="/">
         <img src="{{ asset('img/logo-dark.svg') }}" alt="logo">
     </a>
     <div class="flex items-center mt-2 md:mt-0">
@@ -126,5 +128,6 @@
         </div>
     </div>
 </main>
+<livewire:scripts />
 </body>
 </html>
