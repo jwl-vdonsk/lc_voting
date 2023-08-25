@@ -13,7 +13,7 @@ class Status extends Model
 
     public function ideas()
     {
-        $this->hasMany(Idea::class);
+        return $this->hasMany(Idea::class);
     }
 
 }
