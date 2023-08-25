@@ -6,7 +6,9 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,5 +36,14 @@ class DatabaseSeeder extends Seeder
         Status::factory()->create(['name' => 'Closed']);
 
         Idea::factory(30)->create();
+        User::factory()->create([
+            'name' => 'cuu',
+            'email' => 'cu@cu.com',
+            'email_verified_at' => now(),
+            'password' => '11111111', // password
+            'remember_token' => Str::random(10),
+        ]);
+
+
     }
 }

@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class ShowIdeasTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
@@ -84,16 +83,16 @@ class ShowIdeasTest extends TestCase
         $statusOpen = Status::factory()->create(['name' => 'Open']);
 
 
-        Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
+        $ideas = Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
             'category_id' => $categoryOne->id,
             'status_id' => $statusOpen->id,
         ]);
 
-        $ideaOne = Idea::find(1);
+        $ideaOne = Idea::find($ideas->first()->id);
         $ideaOne->title = 'My First Idea';
         $ideaOne->save();
 
-        $ideaEleven = Idea::find(11);
+        $ideaEleven = Idea::find($ideas->last()->id);
         $ideaEleven->title = 'My Eleventh Idea';
         $ideaEleven->save();
 
