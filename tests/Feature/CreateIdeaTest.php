@@ -65,7 +65,10 @@ class CreateIdeaTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name'=>'Category 1']);
 
-        $statusOpen = Status::factory()->create(['name'=>'Open']);
+        $statusOpen = Status::factory()->create([
+            'id' => 1,
+            'name'=>'Open'
+        ]);
 
         Livewire::actingAs($user)
             ->test(CreateIdea::class)
