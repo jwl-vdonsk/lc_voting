@@ -63,6 +63,7 @@
 
                         @if($hasVoted)
                             <button
+                                wire:click.prevent="vote"
                                 class="w-20 bg-blue text-white border border-blue font-bold text-xxs uppercase rounded-xl
                                 hover:bg-blue-hover transition duration-150 ease-in px-4 py-3 -mx-5"
                             >
@@ -70,6 +71,7 @@
                             </button>
                         @else
                             <button
+                                wire:click.prevent="vote"
                                 class="w-20 bg-gray-200 border border-gray-200 font-bold text-xxs uppercase rounded-xl
                                     hover:border-gray-400 transition duration-150 ease-in px-4 py-3 -mx-5"
                             >
@@ -239,12 +241,14 @@
             </div>
             @if($hasVoted)
                 <button
+                    wire:click.prevent="vote"
                     type="button"
                     class="w-28 h-11 bg-blue text-white font-bold uppercase rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-4 py-3">
                     <span>Voted</span>
                 </button>
             @else
                 <button
+                    wire:click.prevent="vote"
                     type="button"
                     class="w-28 h-11 bg-gray-200 font-bold uppercase rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-4 py-3">
                     <span>Vote</span>
