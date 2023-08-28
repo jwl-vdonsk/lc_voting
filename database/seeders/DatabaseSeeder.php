@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Status;
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -17,12 +18,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'cuu',
+            'email' => 'cu@cu.com',
+            'email_verified_at' => now(),
+            'password' => '11111111', // password
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::factory(19)->create();
 
         Category::factory()->create(['name' => 'Category 1']);
         Category::factory()->create(['name' => 'Category 2']);
@@ -35,15 +40,18 @@ class DatabaseSeeder extends Seeder
         Status::factory()->create(['name' => 'Implemented']);
         Status::factory()->create(['name' => 'Closed']);
 
-        Idea::factory(30)->create();
-        User::factory()->create([
-            'name' => 'cuu',
-            'email' => 'cu@cu.com',
-            'email_verified_at' => now(),
-            'password' => '11111111', // password
-            'remember_token' => Str::random(10),
-        ]);
+        Idea::factory(100)->create();
 
+        foreach (range(1, 20) as $user_id) {
+            foreach (range(1, 100) as $idea_id) {
+                if ($idea_id % 2 === 0) {
+                    Vote::factory()->create([
+                        'user_id' => $user_id,
+                        'idea_id' => $idea_id
+                    ]);
+                }
+            }
+        }
 
     }
 }
