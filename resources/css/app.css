@@ -68,14 +68,14 @@
     @apply bg-gray-200
 }
 .considering {
-    @apply bg-purple
+    @apply bg-purple text-white
 }
 .in-progress {
-    @apply bg-yellow
+    @apply bg-yellow text-white
 }
 .implemented {
-    @apply bg-green
+    @apply bg-green text-white
 }
 .closed {
-    @apply bg-red
+    @apply bg-red text-white
 }
