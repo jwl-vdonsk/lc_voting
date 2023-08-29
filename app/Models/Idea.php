@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\DuplicateVoteException;
+use App\Exceptions\VoteNoteFoundException;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Idea extends Model
 {
     use HasFactory, Sluggable;
+
     protected $guarded = [];
     const PAGINATION_COUNT = 10;
 
@@ -21,14 +24,17 @@ class Idea extends Model
             ]
         ];
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
     public function status()
     {
         return $this->belongsTo(Status::class);
@@ -50,16 +56,26 @@ class Idea extends Model
 
     public function vote(User $user)
     {
+        if ($this->isVotedByUser($user)) {
+            throw new DuplicateVoteException;
+        }
+
         Vote::create([
             'idea_id' => $this->id,
             'user_id' => $user->id,
         ]);
     }
+
     public function removeVote(User $user)
     {
-        Vote::where('idea_id', $this->id)
+        $voteToDelete = Vote::where('idea_id', $this->id)
             ->where('user_id', $user->id)
-            ->first()
-            ->delete();
+            ->first();
+
+            if ($voteToDelete) {
+                $voteToDelete->delete();
+            } else {
+                throw new VoteNoteFoundException;
+            }
     }
 }
