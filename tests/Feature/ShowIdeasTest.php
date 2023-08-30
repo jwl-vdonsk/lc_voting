@@ -24,9 +24,6 @@ class ShowIdeasTest extends TestCase
         $statusOpen = Status::factory()->create(['name' => 'Open']);
         $statusConsidering = Status::factory()->create(['name' => 'Considering']);
 
-
-
-
         $ideaOne = Idea::factory()->create([
             'user_id' => $user->id,
             'title' => 'My First Idea',
@@ -156,4 +153,29 @@ class ShowIdeasTest extends TestCase
         $this->assertTrue(request()->path() === 'ideas/my-first-idea-1');
 
     }
+
+    /** @test */
+    public function in_app_back_button_works_when_show_page_only_page_visited()
+    {
+        $user = User::factory()->create();
+
+        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
+        $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
+
+        $statusOpen = Status::factory()->create(['name' => 'Open']);
+        $statusConsidering = Status::factory()->create(['name' => 'Considering']);
+
+        $ideaOne = Idea::factory()->create([
+            'user_id' => $user->id,
+            'title' => 'My First Idea',
+            'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
+            'description' => 'Description of my first idea',
+        ]);
+
+        $response = $this->get(route('idea.show', $ideaOne));
+
+        $this->assertEquals(route('idea.index'), $response['backUrl']);
+    }
+
 }
