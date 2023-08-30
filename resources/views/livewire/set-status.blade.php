@@ -85,15 +85,16 @@
                 </button>
                 <button
                     type="submit"
-                    class="flex items-center justify-center w-1/2 h-11 text-sm text-white bg-blue font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
+                    class="flex items-center justify-center w-1/2 h-11 text-sm text-white bg-blue font-semibold
+                    rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3
+                    disabled:opacity-50">
                     Update
                 </button>
             </div>
 
             <div>
                 <label class="font-normal inline-flex items-center">
-                    <input type="checkbox" name="notify_voters" class="bg-gray-200 border-none rounded"
-                           checked="">
+                    <input wire:model="notifyAllVoters" type="checkbox" name="notify_voters" class="bg-gray-200 border-none rounded">
                     <span class="ml-2">Notify all voters</span>
                 </label>
             </div>
