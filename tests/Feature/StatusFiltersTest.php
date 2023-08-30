@@ -38,7 +38,7 @@ class StatusFiltersTest extends TestCase
         ]);
 
         $this->get(route('idea.index'))
-        ->assertSeeLivewire('status-filter');
+            ->assertSeeLivewire('status-filter');
 
     }
 
@@ -63,7 +63,7 @@ class StatusFiltersTest extends TestCase
         ]);
 
         $this->get(route('idea.show', $idea))
-        ->assertSeeLivewire('status-filter');
+            ->assertSeeLivewire('status-filter');
 
     }
 
@@ -96,8 +96,8 @@ class StatusFiltersTest extends TestCase
         ]);
 
         Livewire::test(StatusFilter::class)
-        ->assertSee('All Ideas (2)')
-        ->assertSee('Implemented (2)');
+            ->assertSee('All Ideas (2)')
+            ->assertSee('Implemented (2)');
 
     }
 
@@ -149,16 +149,12 @@ class StatusFiltersTest extends TestCase
             'category_id' => $category->id,
             'status_id' => $statusInProgress->id,
         ]);
-
         Livewire::withQueryParams(['status' => 'In Progress'])
             ->test(IdeasIndex::class)
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->count() == 4
                     && $ideas->first()->status->name === 'In Progress';
             });
-
-//        $response->assertSee('<div class="in-progress text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">In Progress</div>',false);
-//        $response->assertDontSee('<div class="considering text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>',false);
     }
 
     /** @test */
