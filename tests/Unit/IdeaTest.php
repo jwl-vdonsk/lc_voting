@@ -22,26 +22,12 @@ class IdeaTest extends TestCase
         $user = User::factory()->create();
         $userB = User::factory()->create();
 
-        $category = Category::factory()->create(['name' => 'Category 1']);
-
-        $status = Status::factory()->create([
-            'name' => 'Open',
-            'id' => 1
-        ]);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My First Idea',
-            'category_id' => $category->id,
-            'status_id' => $status->id,
-            'description' => 'Description of my first idea',
-        ]);
+        $idea = Idea::factory()->create();
 
         Vote::factory()->create([
             'idea_id' => $idea->id,
             'user_id' => $user->id,
         ]);
-
 
         $this->assertTrue($idea->isVotedByUser($user));
         $this->assertFalse($idea->isVotedByUser($userB));
@@ -52,27 +38,11 @@ class IdeaTest extends TestCase
     public function user_can_vote_for_idea()
     {
         $user = User::factory()->create();
-        $userB = User::factory()->create();
-
-        $category = Category::factory()->create(['name' => 'Category 1']);
-
-        $status = Status::factory()->create([
-            'name' => 'Open',
-            'id' => 1
-        ]);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My First Idea',
-            'category_id' => $category->id,
-            'status_id' => $status->id,
-            'description' => 'Description of my first idea',
-        ]);
+        $idea = Idea::factory()->create();
 
         $this->assertFalse($idea->isVotedByUser($user));
 
         $idea->vote($user);
-
         $this->assertTrue($idea->isVotedByUser($user));
 
     }
@@ -82,20 +52,7 @@ class IdeaTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $category = Category::factory()->create(['name' => 'Category 1']);
-
-        $status = Status::factory()->create([
-            'name' => 'Open',
-            'id' => 1
-        ]);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My First Idea',
-            'category_id' => $category->id,
-            'status_id' => $status->id,
-            'description' => 'Description of my first idea',
-        ]);
+        $idea = Idea::factory()->create();
 
         Vote::factory()->create([
             'idea_id' => $idea->id,
@@ -112,20 +69,7 @@ class IdeaTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $category = Category::factory()->create(['name' => 'Category 1']);
-
-        $status = Status::factory()->create([
-            'name' => 'Open',
-            'id' => 1
-        ]);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My First Idea',
-            'category_id' => $category->id,
-            'status_id' => $status->id,
-            'description' => 'Description of my first idea',
-        ]);
+        $idea = Idea::factory()->create();
 
         Vote::factory()->create([
             'idea_id' => $idea->id,
@@ -145,20 +89,7 @@ class IdeaTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $category = Category::factory()->create(['name' => 'Category 1']);
-
-        $status = Status::factory()->create([
-            'name' => 'Open',
-            'id' => 1
-        ]);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'title' => 'My First Idea',
-            'category_id' => $category->id,
-            'status_id' => $status->id,
-            'description' => 'Description of my first idea',
-        ]);
+        $idea = Idea::factory()->create();
 
         $this->expectException(VoteNoteFoundException::class);
 

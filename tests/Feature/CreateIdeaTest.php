@@ -61,22 +61,24 @@ class CreateIdeaTest extends TestCase
     /** @test */
     public function creating_an_idea_works_correctly()
     {
-        $user = User::factory()->create();
-
-        $categoryOne = Category::factory()->create(['name'=>'Category 1']);
-
-        $statusOpen = Status::factory()->create([
-            'id' => 1,
-            'name'=>'Open'
+        $user = User::factory()->create([
+            'id' => 1
         ]);
+
+        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
+
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'id' => 1]);
+
 
         Livewire::actingAs($user)
             ->test(CreateIdea::class)
             ->set('title', 'My First Idea')
             ->set('category', $categoryOne->id)
             ->set('description', 'This is my first idea')
-                ->call('createIdea')
+            ->call('createIdea')
             ->assertRedirect('/');
+
+        $ideas = Idea::all();
 
         $response = $this->actingAs($user)->get(route('idea.index'));
         $response->assertSuccessful();
@@ -86,7 +88,13 @@ class CreateIdeaTest extends TestCase
         $this->assertDatabaseHas('ideas', [
             'title' => 'My First Idea'
         ]);
+
+        $this->assertDatabaseHas('votes', [
+            'idea_id' => Idea::find($ideas->last()->id)->id,
+            'user_id' => 1,
+        ]);
     }
+
     /** @test */
     public function creating_two_ideas_with_same_title_still_works_but_has_different_slugs()
     {

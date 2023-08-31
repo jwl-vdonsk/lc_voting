@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
@@ -18,7 +17,6 @@ class GravatarTest extends TestCase
 
 
         $user = User::factory()->create([
-            'name' => 'Andrea',
             'email' => 'afakeemail@afakeemail.com'
         ]);
 
@@ -39,7 +37,6 @@ class GravatarTest extends TestCase
 
 
         $user = User::factory()->create([
-            'name' => 'Andrea',
             'email' => '9fakeemail@afakeemail.com'
         ]);
 
