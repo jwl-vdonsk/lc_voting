@@ -48,16 +48,18 @@
                                       z-10 py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0"
                             >
 
-                                <li>
-                                    <a href="#"
-                                        @click="
-                                            isOpen = false
-                                            $dispatch('custom-show-edit-modal')
-                                        "
-                                        class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-green">
-                                        Edit Idea
-                                    </a>
-                                </li>
+                                @can('update', $idea)
+                                    <li>
+                                        <a href="#"
+                                            @click="
+                                                isOpen = false
+                                                $dispatch('custom-show-edit-modal')
+                                            "
+                                            class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-green">
+                                            Edit Idea
+                                        </a>
+                                    </li>
+                                @endcan
                                 <li><a href="#"
                                        class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in">Mark
                                         as spam</a></li>
