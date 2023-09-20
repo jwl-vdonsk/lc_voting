@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Termwind\Components\Li;
 use Tests\TestCase;
 
 class OtherFiltersTest extends TestCase
@@ -158,6 +159,39 @@ class OtherFiltersTest extends TestCase
                 return $ideas->count() === 3
                     && $ideas->first()->title === 'My Third Idea'
                     && $ideas->get(1)->title === 'My Second Idea';
+            });
+    }
+
+    /** @test */
+    public function spam_ideas_filter_works()
+    {
+        $user = User::factory()->admin()->create();
+
+        $ideaOne = Idea::factory()->create([
+            'title' => 'Idea One',
+            'spam_reports' => 1
+        ]);
+
+        $ideaTwo = Idea::factory()->create([
+            'title' => 'Idea Two',
+            'spam_reports' => 2
+        ]);
+
+        $ideaThree = Idea::factory()->create([
+            'title' => 'Idea Three',
+            'spam_reports' => 3
+        ]);
+
+        $ideaFour = Idea::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(IdeasIndex::class)
+            ->set('filter', 'Spam Ideas')
+            ->assertViewHas('ideas', function ($ideas) {
+                return $ideas->count() === 3
+                    && $ideas->first()->title === 'Idea Three'
+                    && $ideas->get(1)->title === 'Idea Two'
+                    && $ideas->get(2)->title === 'Idea One';
             });
     }
 

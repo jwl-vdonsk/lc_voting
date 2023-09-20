@@ -139,12 +139,4 @@ class DeleteIdeaTest extends TestCase
             ->assertDontSee('Delete Idea');
     }
 
-    /** @test */
-    public function test()
-    {
-        $this->assertTrue(true);
-    }
-
 }
-
-
