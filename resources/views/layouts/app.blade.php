@@ -74,7 +74,7 @@
             </div>
 
             @auth
-                <livewire:create-idea />
+                <livewire:create-idea/>
             @else
                 <div class="my-6 text-center">
                     <a
@@ -92,12 +92,21 @@
         </div>
     </div>
     <div class="w-full px-2 md:px-0 md:w-175">
-        <livewire:status-filter />
+        <livewire:status-filter/>
         <div class="mt-8">
             {{ $slot }}
         </div>
     </div>
 </main>
+
+@if (session('success_message'))
+    <x-notification-success
+        :redirect="true"
+        message-to-display="{{ session('success_message') }}"
+    />
+@endif
+
+
 <livewire:scripts/>
 </body>
 </html>
