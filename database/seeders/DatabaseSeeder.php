@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'cuu',
             'email' => 'cu@cu.com',
             'email_verified_at' => now(),
-            'password' => '11111111', // password
+            'password' => '11111111',
             'remember_token' => Str::random(10),
         ]);
 
