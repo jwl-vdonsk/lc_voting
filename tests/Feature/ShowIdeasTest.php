@@ -5,12 +5,13 @@ namespace Tests\Feature;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Status;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ShowIdeasTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /** @test */
     public function list_of_ideas_shows_on_main_page()
@@ -73,31 +74,20 @@ class ShowIdeasTest extends TestCase
     /** @test */
     public function ideas_pagination_works()
     {
-        Status::factory()->create([
-            'id' => 1,
-            'name' => 'Open'
-        ]);
+        $ideaOne = Idea::factory()->create();
 
-        $ideas = Idea::factory(Idea::PAGINATION_COUNT + 1)->create();
-
-        $ideaOne = Idea::find($ideas->first()->id);
-        $ideaOne->title = 'My First Idea';
-        $ideaOne->save();
-
-        $ideaOnSecondPage = Idea::find($ideas->last()->id);
-        $ideaOnSecondPage->title = 'My Idea On Second Page';
-        $ideaOnSecondPage->save();
-
+        Idea::factory($ideaOne->getPerPage())->create();
 
         $response = $this->get('/');
 
-        $response->assertSee($ideaOnSecondPage->title);
+//        dd(Idea::find(Idea::count() - 1)->id);
+        $response->assertSee(Idea::find(Idea::count())->title);
         $response->assertDontSee($ideaOne->title);
 
         $response = $this->get('/?page=2');
 
         $response->assertSee($ideaOne->title);
-        $response->assertDontSee($ideaOnSecondPage->title);
+        $response->assertDontSee(Idea::find(Idea::count())->title);
     }
 
     /** @test */
