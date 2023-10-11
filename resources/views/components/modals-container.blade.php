@@ -13,3 +13,7 @@
 @can('delete', $idea)
     <livewire:delete-idea :idea="$idea" />
 @endcan
+
+@auth
+    <livewire:edit-comment />
+@endauth
