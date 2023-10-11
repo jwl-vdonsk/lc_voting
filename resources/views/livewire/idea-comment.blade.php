@@ -50,7 +50,6 @@
                                            @click.prevent="
                                                     isOpen = false
                                                     Livewire.emit('setEditComment', {{ $comment->id }})
-{{--                                                    $dispatch('custom-show-edit-modal')--}}
                                                 "
                                            class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-green">
                                             Edit Comment
@@ -58,12 +57,23 @@
                                     </li>
                                 @endcan
 
-                                <li><a href="#"
-                                       class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in">Mark
-                                        as spam</a></li>
-                                <li><a href="#"
-                                       class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-red">Delete
-                                        Post</a></li>
+                                    <li><a href="#"
+                                           class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in">Mark
+                                            as spam</a>
+                                    </li>
+
+                                @can('delete', $comment)
+                                    <li>
+                                        <a href="#"
+                                           @click.prevent="
+                                                isOpen = false
+                                                Livewire.emit('setDeleteComment', {{ $comment->id }})
+                                            "
+                                           class="hover:bg-gray-200 block px-5 py-3 transition duration-150 ease-in text-red">
+                                            Delete Comment
+                                        </a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </div>
