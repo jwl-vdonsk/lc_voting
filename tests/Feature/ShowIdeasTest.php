@@ -80,7 +80,6 @@ class ShowIdeasTest extends TestCase
 
         $response = $this->get('/');
 
-//        dd(Idea::find(Idea::count() - 1)->id);
         $response->assertSee(Idea::find(Idea::count())->title);
         $response->assertDontSee($ideaOne->title);
 
