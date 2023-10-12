@@ -48,7 +48,7 @@
                 @auth
                     <div
                         x-data="{ isOpen: false }"
-                        class="flex items-center space-x-2 "
+                        class="flex items-center space-x-2 text-gray-900"
                     >
                         <div class="relative">
                             <button
