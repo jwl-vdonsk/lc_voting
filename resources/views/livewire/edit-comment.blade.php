@@ -3,10 +3,10 @@
     x-data="{ isOpen: false}"
     x-show="isOpen"
     @keydown.escape.window="isOpen = false"
-    @custom-show-edit-modal.window="
-        isOpen = true
-        $nextTick(() => $refs.title.focus())
-    "
+{{--    @custom-show-edit-modal.window="--}}
+{{--        isOpen = true--}}
+{{--        $nextTick(() => $refs.title.focus())--}}
+{{--    "--}}
     x-init="
         Livewire.on('commentWasUpdated', () => {
             isOpen = false
@@ -52,9 +52,9 @@
 
                 <form wire:submit.prevent="updateComment" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
-                        <textarea x-ref="editComment" wire:model.defer="body" name="idea" id="idea" cols="30" rows="4"
+                        <textarea x-ref="editComment" wire:model.defer="body" name="comment" id="comment" cols="30" rows="4"
                                   class="w-full bg-gray-100 rounded-xl border-none placeholder-gray-900 text-sm px-4 py-2"
-                                  placeholder="Describe your idea"></textarea>
+                                  placeholder="Type your comment here"></textarea>
                         @error('body')
                         <p class="text-red text-xs mt-1">{{ $message }}</p>
                         @enderror
