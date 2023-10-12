@@ -5,6 +5,7 @@ namespace Tests\Feature\Comments;
 use App\Http\Livewire\AddComment;
 use App\Models\Comment;
 use App\Models\Idea;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -66,6 +67,9 @@ class AddCommentTest extends TestCase
     {
         $user = User::factory()->create();
         $idea = Idea::factory()->create();
+        $status = Status::factory()->create([
+            'id' => 1
+        ]);
 
         Livewire::actingAs($user)
             ->test(AddComment::class, [
