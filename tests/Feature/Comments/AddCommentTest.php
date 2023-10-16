@@ -7,14 +7,17 @@ use App\Models\Comment;
 use App\Models\Idea;
 use App\Models\Status;
 use App\Models\User;
+use App\Notifications\CommentAdded;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class AddCommentTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /** @test */
     public function add_comment_livewire_component_renders()
@@ -67,9 +70,10 @@ class AddCommentTest extends TestCase
     {
         $user = User::factory()->create();
         $idea = Idea::factory()->create();
-        $status = Status::factory()->create([
-            'id' => 1
-        ]);
+
+
+        Notification::fake();
+        Notification::assertNothingSent();
 
         Livewire::actingAs($user)
             ->test(AddComment::class, [
@@ -78,6 +82,10 @@ class AddCommentTest extends TestCase
             ->set('comment', 'First Comment')
             ->call('addComment')
             ->assertEmitted('commentWasAdded');
+
+        Notification::assertSentTo(
+            [$idea->user], CommentAdded::class
+        );
 
         $this->assertEquals(1, Comment::count());
         $this->assertEquals('First Comment', $idea->comments->first()->body);
