@@ -12,14 +12,12 @@ class CommentAdded extends Notification
 {
     use Queueable;
 
-    public $comment;
-
     /**
      * Create a new notification instance.
      */
-    public function __construct(Comment $comment)
+    public function __construct(public $comment)
     {
-        $this->comment = $comment;
+
     }
     /**
      * Get the notification's delivery channels.
@@ -55,9 +53,9 @@ class CommentAdded extends Notification
             'comment_body' => $this->comment->body,
             'user_avatar' => $this->comment->user->getAvatar(),
             'user_name' => $this->comment->user->name,
-//            'idea_id' => $this->comment->idea->id,
-//            'idea_slug' => $this->comment->idea->slug,
-//            'idea_title' => $this->comment->idea->title,
+            'idea_id' => $this->comment->idea->id,
+            'idea_slug' => $this->comment->idea->slug,
+            'idea_title' => $this->comment->idea->title,
         ];
     }
 }

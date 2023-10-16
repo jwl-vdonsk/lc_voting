@@ -19,7 +19,7 @@ class Comment extends Model
 
     public function idea()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Idea::class);
     }
 
     public function status()

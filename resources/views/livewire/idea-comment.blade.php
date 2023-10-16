@@ -1,5 +1,5 @@
 <div
-
+    id="comment-{{ $comment->id }}"
     class="
         @if ($comment->is_status_update) is-status-update {{ Str::kebab($comment->status->name) }} @endif
         comment-container relative bg-white rounded-xl flex transition duration-500 ease-in mt-6

@@ -1,4 +1,5 @@
 @props([
+    'type' => 'success',
     'redirect' => false,
     'messageToDisplay' => '',
 ])
@@ -72,9 +73,18 @@
     px-6 py-5 mx-2 sm:mx-6 my-8 z-20"
 >
     <div class="flex items-center">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green mr-3">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+        @if ($type === 'success')
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green mr-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        @endif
+
+        @if ($type === 'error')
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red mr-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        @endif
+
         <div class="font-semibold text-gray-500 sm:text-base" x-text="messageToDisplay"></div>
     </div>
     <button class="text-gray-400 hover:text-gray-500">
